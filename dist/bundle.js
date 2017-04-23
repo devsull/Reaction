@@ -95,19 +95,25 @@ var App = (function (_super) {
     __extends(App, _super);
     function App() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = { inputValue: "" };
-        _this.inputValueUpdate = function (value) {
-            console.log("invoked APP update with", value);
-            _this.setState({ inputValue: value });
+        _this.state = {
+            emailValue: "",
+            testValue: ""
         };
         return _this;
     }
     App.prototype.render = function () {
-        var app = React.createElement("div", null,
-            React.createElement(FormInput_1.FormInput, { setValueFunction: this.inputValueUpdate }),
-            React.createElement("div", null,
-                "Value: ",
-                this.state.inputValue));
+        var _this = this;
+        var app = React.createElement("div", { className: "row" },
+            React.createElement("div", { className: "col" },
+                React.createElement(FormInput_1.FormInput, { label: "Email", setValueFunction: function (value) { return _this.setState({ emailValue: value }); }, type: "email" }),
+                React.createElement("div", null,
+                    "Email Value: ",
+                    this.state.emailValue)),
+            React.createElement("div", { className: "col" },
+                React.createElement(FormInput_1.FormInput, { label: "Testing", setValueFunction: function (value) { return _this.setState({ testValue: value }); } }),
+                React.createElement("div", null,
+                    "Test Value: ",
+                    this.state.testValue)));
         return app;
     };
     return App;
@@ -141,17 +147,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var FormInput = (function (_super) {
     __extends(FormInput, _super);
-    function FormInput() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function FormInput(props) {
+        var _this = _super.call(this, props) || this;
         _this.handleOnChange = function (event) {
             _this.props.setValueFunction(event.target.value);
         };
         return _this;
     }
+    ;
     FormInput.prototype.render = function () {
         return React.createElement("div", { className: "form-group" },
-            React.createElement("label", { htmlFor: "exampleInputEmail1" }, "Email address"),
-            React.createElement("input", { type: "email", className: "form-control", id: "exampleInputEmail1", "aria-describedby": "emailHelp", placeholder: "Enter email", onChange: this.handleOnChange }),
+            React.createElement("label", { htmlFor: "exampleInputEmail1" }, this.props.label),
+            React.createElement("input", { type: this.props.type === undefined ? "text" : this.props.type, className: "form-control", id: "exampleInputEmail1", "aria-describedby": "emailHelp", placeholder: "Enter email", onChange: this.handleOnChange }),
             React.createElement("small", { id: "emailHelp", className: "form-text text-muted" }, "We'll never share your email with anyone else, or will we?"));
     };
     return FormInput;
