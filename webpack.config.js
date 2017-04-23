@@ -31,4 +31,12 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
+
+    devServer: {
+        //contentBase: "./",
+        historyApiFallback: true,
+        inline: true
+    },
+
+    watch: true
 };

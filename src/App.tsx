@@ -1,15 +1,22 @@
 import * as React from "react";
 
-import { Hello } from "./components/Hello";
+import { FormInput } from "./components/FormInput";
 
-export class App extends React.Component<undefined, undefined> {
+export class App extends React.Component<any, any> {
+    state = { inputValue: "" };
+
+    inputValueUpdate = (value: string) => {
+        console.log("invoked APP update with", value)
+        this.setState({inputValue: value})
+    }
+
     render() {
-        const app = 
-            <div className="container">
-                <div className="row">
-                    <Hello compiler="TypeScript" framework="React" />
-                </div>
-            </div>;
+        const app = <div>
+            <FormInput setValueFunction={this.inputValueUpdate} />
+            <div>
+                Value: {this.state.inputValue}
+            </div>
+        </div>;
 
         return app;
     }

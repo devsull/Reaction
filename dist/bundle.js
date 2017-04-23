@@ -90,17 +90,24 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var Hello_1 = __webpack_require__(3);
-// export interface HelloProps { compiler: string; framework: string; }
+var FormInput_1 = __webpack_require__(3);
 var App = (function (_super) {
     __extends(App, _super);
     function App() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = { inputValue: "" };
+        _this.inputValueUpdate = function (value) {
+            console.log("invoked APP update with", value);
+            _this.setState({ inputValue: value });
+        };
+        return _this;
     }
     App.prototype.render = function () {
-        var app = React.createElement("div", { className: "container" },
-            React.createElement("div", { className: "row" },
-                React.createElement(Hello_1.Hello, { compiler: "TypeScript", framework: "React" })));
+        var app = React.createElement("div", null,
+            React.createElement(FormInput_1.FormInput, { setValueFunction: this.inputValueUpdate }),
+            React.createElement("div", null,
+                "Value: ",
+                this.state.inputValue));
         return app;
     };
     return App;
@@ -132,24 +139,24 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-// 'HelloProps' describes the shape of props.
-// State is never set so we use the 'undefined' type.
-var Hello = (function (_super) {
-    __extends(Hello, _super);
-    function Hello() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var FormInput = (function (_super) {
+    __extends(FormInput, _super);
+    function FormInput() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.handleOnChange = function (event) {
+            _this.props.setValueFunction(event.target.value);
+        };
+        return _this;
     }
-    Hello.prototype.render = function () {
-        return React.createElement("h1", null,
-            "Hello from ",
-            this.props.compiler,
-            " and ",
-            this.props.framework,
-            "!");
+    FormInput.prototype.render = function () {
+        return React.createElement("div", { className: "form-group" },
+            React.createElement("label", { htmlFor: "exampleInputEmail1" }, "Email address"),
+            React.createElement("input", { type: "email", className: "form-control", id: "exampleInputEmail1", "aria-describedby": "emailHelp", placeholder: "Enter email", onChange: this.handleOnChange }),
+            React.createElement("small", { id: "emailHelp", className: "form-text text-muted" }, "We'll never share your email with anyone else, or will we?"));
     };
-    return Hello;
+    return FormInput;
 }(React.Component));
-exports.Hello = Hello;
+exports.FormInput = FormInput;
 
 
 /***/ }),

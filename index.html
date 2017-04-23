@@ -12,7 +12,7 @@
     </head>
     <body>
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
                         Playing with React/TS/Webpack/BS
@@ -20,7 +20,12 @@
                 </div>
             </div>
         </nav>
-        <div id="app"></div>
+        <div class="container">
+            <div class="row">
+                <h1>Reaction</h1>
+            </div>
+            <div id="app" class=row></div>
+        </div>
 
         <!-- Dependencies -->
         <script src="./node_modules/react/dist/react.js"></script>
